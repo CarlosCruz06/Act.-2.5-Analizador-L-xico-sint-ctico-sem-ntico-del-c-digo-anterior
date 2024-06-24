@@ -15,11 +15,38 @@
         </form>
         {% if tokens %}
             <h2>Tokens</h2>
-            <ul>
-                {% for token in tokens %}
-                    <li>{{ token }}</li>
-                {% endfor %}
-            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Línea</th>
+                        <th>Token</th>
+                        <th>Reservada</th>
+                        <th>Identificador</th>
+                        <th>Número</th>
+                        <th>Símbolo</th>
+                        <th>Paréntesis Izquierdo</th>
+                        <th>Paréntesis Derecho</th>
+                        <th>Llave Izquierda</th>
+                        <th>Llave Derecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for token in tokens %}
+                        <tr>
+                            <td>{{ token.line }}</td>
+                            <td>{{ token.value }}</td>
+                            <td>{{ 'X' if token.type == 'reservada' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'identificador' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'numero' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'simbolo' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'parentesis izquierdo' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'parentesis derecho' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'llave izquierda' else '' }}</td>
+                            <td>{{ 'X' if token.type == 'llave derecha' else '' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
         {% if parse_result %}
             <h2>Árbol de Parseo</h2>

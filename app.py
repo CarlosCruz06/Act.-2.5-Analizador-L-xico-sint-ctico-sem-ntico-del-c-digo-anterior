@@ -19,7 +19,12 @@ def analyze():
         tok = lexer.token()
         if not tok:
             break
-        tokens.append(tok)
+        token_type = classify_token(tok)
+        tokens.append({
+            'line': tok.lineno,
+            'value': tok.value,
+            'type': token_type
+        })
     
     # Intentar parsear el código
     try:
@@ -36,6 +41,25 @@ def analyze():
     semantic_errors = check_semantics(parse_result)
 
     return render_template('index.html', tokens=tokens, parse_result=parse_result, semantic_errors=semantic_errors)
+
+def classify_token(tok):
+    if tok.type in ('INT', 'WHILE', 'DO', 'ENDDO', 'ENDWHILE'):
+        return 'reservada'
+    elif tok.type == 'ID':
+        return 'identificador'
+    elif tok.type == 'NUM':
+        return 'numero'
+    elif tok.type in ('ASSIGN', 'PLUS', 'MUL', 'SEMI'):
+        return 'simbolo'
+    elif tok.type == 'LPAREN':
+        return 'parentesis izquierdo'
+    elif tok.type == 'RPAREN':
+        return 'parentesis derecho'
+    elif tok.type == 'LBRACE':
+        return 'llave izquierda'
+    elif tok.type == 'RBRACE':
+        return 'llave derecha'
+    return 'desconocido'
 
 if __name__ == '__main__':
     app.run(debug=True)
