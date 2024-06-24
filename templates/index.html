@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Analizador Léxico, Sintáctico y Semántico</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Analizador Léxico, Sintáctico y Semántico</h1>
+        <form action="/analyze" method="post">
+            <textarea name="code" rows="10" cols="50"></textarea><br>
+            <button type="submit">Analizar</button>
+        </form>
+        {% if tokens %}
+            <h2>Tokens</h2>
+            <ul>
+                {% for token in tokens %}
+                    <li>{{ token }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if parse_result %}
+            <h2>Árbol de Parseo</h2>
+            <pre>{{ parse_result }}</pre>
+        {% endif %}
+        {% if semantic_errors %}
+            <h2>Errores Semánticos</h2>
+            <ul>
+                {% for error in semantic_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

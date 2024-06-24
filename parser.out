@@ -1,0 +1,435 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement_list statement
+Rule 3     statement_list -> statement
+Rule 4     statement -> declaration
+Rule 5     statement -> assignment
+Rule 6     statement -> loop
+Rule 7     declaration -> INT ID ASSIGN NUM SEMI
+Rule 8     assignment -> ID ASSIGN expression SEMI
+Rule 9     expression -> term
+Rule 10    expression -> expression PLUS term
+Rule 11    term -> factor
+Rule 12    term -> term MUL factor
+Rule 13    factor -> NUM
+Rule 14    factor -> ID
+Rule 15    loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+Rule 16    condition -> ID ASSIGN NUM
+
+Terminals, with rules where they appear
+
+ASSIGN               : 7 8 16
+DO                   : 15
+ENDDO                : 15
+ENDWHILE             : 15
+ID                   : 7 8 14 16
+INT                  : 7
+LPAREN               : 15
+MUL                  : 12
+NUM                  : 7 13 16
+PLUS                 : 10
+RPAREN               : 15
+SEMI                 : 7 8
+WHILE                : 15
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 5
+condition            : 15
+declaration          : 4
+expression           : 8 10
+factor               : 11 12
+loop                 : 6
+program              : 0
+statement            : 2 3
+statement_list       : 1 2 15
+term                 : 9 10 12
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . declaration
+    (5) statement -> . assignment
+    (6) statement -> . loop
+    (7) declaration -> . INT ID ASSIGN NUM SEMI
+    (8) assignment -> . ID ASSIGN expression SEMI
+    (15) loop -> . DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+
+    INT             shift and go to state 7
+    ID              shift and go to state 8
+    DO              shift and go to state 9
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    declaration                    shift and go to state 4
+    assignment                     shift and go to state 5
+    loop                           shift and go to state 6
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . declaration
+    (5) statement -> . assignment
+    (6) statement -> . loop
+    (7) declaration -> . INT ID ASSIGN NUM SEMI
+    (8) assignment -> . ID ASSIGN expression SEMI
+    (15) loop -> . DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    INT             shift and go to state 7
+    ID              shift and go to state 8
+    DO              shift and go to state 9
+
+    statement                      shift and go to state 10
+    declaration                    shift and go to state 4
+    assignment                     shift and go to state 5
+    loop                           shift and go to state 6
+
+state 3
+
+    (3) statement_list -> statement .
+
+    INT             reduce using rule 3 (statement_list -> statement .)
+    ID              reduce using rule 3 (statement_list -> statement .)
+    DO              reduce using rule 3 (statement_list -> statement .)
+    $end            reduce using rule 3 (statement_list -> statement .)
+    ENDDO           reduce using rule 3 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> declaration .
+
+    INT             reduce using rule 4 (statement -> declaration .)
+    ID              reduce using rule 4 (statement -> declaration .)
+    DO              reduce using rule 4 (statement -> declaration .)
+    $end            reduce using rule 4 (statement -> declaration .)
+    ENDDO           reduce using rule 4 (statement -> declaration .)
+
+
+state 5
+
+    (5) statement -> assignment .
+
+    INT             reduce using rule 5 (statement -> assignment .)
+    ID              reduce using rule 5 (statement -> assignment .)
+    DO              reduce using rule 5 (statement -> assignment .)
+    $end            reduce using rule 5 (statement -> assignment .)
+    ENDDO           reduce using rule 5 (statement -> assignment .)
+
+
+state 6
+
+    (6) statement -> loop .
+
+    INT             reduce using rule 6 (statement -> loop .)
+    ID              reduce using rule 6 (statement -> loop .)
+    DO              reduce using rule 6 (statement -> loop .)
+    $end            reduce using rule 6 (statement -> loop .)
+    ENDDO           reduce using rule 6 (statement -> loop .)
+
+
+state 7
+
+    (7) declaration -> INT . ID ASSIGN NUM SEMI
+
+    ID              shift and go to state 11
+
+
+state 8
+
+    (8) assignment -> ID . ASSIGN expression SEMI
+
+    ASSIGN          shift and go to state 12
+
+
+state 9
+
+    (15) loop -> DO . statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+    (2) statement_list -> . statement_list statement
+    (3) statement_list -> . statement
+    (4) statement -> . declaration
+    (5) statement -> . assignment
+    (6) statement -> . loop
+    (7) declaration -> . INT ID ASSIGN NUM SEMI
+    (8) assignment -> . ID ASSIGN expression SEMI
+    (15) loop -> . DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+
+    INT             shift and go to state 7
+    ID              shift and go to state 8
+    DO              shift and go to state 9
+
+    statement_list                 shift and go to state 13
+    statement                      shift and go to state 3
+    declaration                    shift and go to state 4
+    assignment                     shift and go to state 5
+    loop                           shift and go to state 6
+
+state 10
+
+    (2) statement_list -> statement_list statement .
+
+    INT             reduce using rule 2 (statement_list -> statement_list statement .)
+    ID              reduce using rule 2 (statement_list -> statement_list statement .)
+    DO              reduce using rule 2 (statement_list -> statement_list statement .)
+    $end            reduce using rule 2 (statement_list -> statement_list statement .)
+    ENDDO           reduce using rule 2 (statement_list -> statement_list statement .)
+
+
+state 11
+
+    (7) declaration -> INT ID . ASSIGN NUM SEMI
+
+    ASSIGN          shift and go to state 14
+
+
+state 12
+
+    (8) assignment -> ID ASSIGN . expression SEMI
+    (9) expression -> . term
+    (10) expression -> . expression PLUS term
+    (11) term -> . factor
+    (12) term -> . term MUL factor
+    (13) factor -> . NUM
+    (14) factor -> . ID
+
+    NUM             shift and go to state 19
+    ID              shift and go to state 15
+
+    expression                     shift and go to state 16
+    term                           shift and go to state 17
+    factor                         shift and go to state 18
+
+state 13
+
+    (15) loop -> DO statement_list . ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+    (2) statement_list -> statement_list . statement
+    (4) statement -> . declaration
+    (5) statement -> . assignment
+    (6) statement -> . loop
+    (7) declaration -> . INT ID ASSIGN NUM SEMI
+    (8) assignment -> . ID ASSIGN expression SEMI
+    (15) loop -> . DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE
+
+    ENDDO           shift and go to state 20
+    INT             shift and go to state 7
+    ID              shift and go to state 8
+    DO              shift and go to state 9
+
+    statement                      shift and go to state 10
+    declaration                    shift and go to state 4
+    assignment                     shift and go to state 5
+    loop                           shift and go to state 6
+
+state 14
+
+    (7) declaration -> INT ID ASSIGN . NUM SEMI
+
+    NUM             shift and go to state 21
+
+
+state 15
+
+    (14) factor -> ID .
+
+    MUL             reduce using rule 14 (factor -> ID .)
+    SEMI            reduce using rule 14 (factor -> ID .)
+    PLUS            reduce using rule 14 (factor -> ID .)
+
+
+state 16
+
+    (8) assignment -> ID ASSIGN expression . SEMI
+    (10) expression -> expression . PLUS term
+
+    SEMI            shift and go to state 22
+    PLUS            shift and go to state 23
+
+
+state 17
+
+    (9) expression -> term .
+    (12) term -> term . MUL factor
+
+    SEMI            reduce using rule 9 (expression -> term .)
+    PLUS            reduce using rule 9 (expression -> term .)
+    MUL             shift and go to state 24
+
+
+state 18
+
+    (11) term -> factor .
+
+    MUL             reduce using rule 11 (term -> factor .)
+    SEMI            reduce using rule 11 (term -> factor .)
+    PLUS            reduce using rule 11 (term -> factor .)
+
+
+state 19
+
+    (13) factor -> NUM .
+
+    MUL             reduce using rule 13 (factor -> NUM .)
+    SEMI            reduce using rule 13 (factor -> NUM .)
+    PLUS            reduce using rule 13 (factor -> NUM .)
+
+
+state 20
+
+    (15) loop -> DO statement_list ENDDO . WHILE LPAREN condition RPAREN ENDWHILE
+
+    WHILE           shift and go to state 25
+
+
+state 21
+
+    (7) declaration -> INT ID ASSIGN NUM . SEMI
+
+    SEMI            shift and go to state 26
+
+
+state 22
+
+    (8) assignment -> ID ASSIGN expression SEMI .
+
+    INT             reduce using rule 8 (assignment -> ID ASSIGN expression SEMI .)
+    ID              reduce using rule 8 (assignment -> ID ASSIGN expression SEMI .)
+    DO              reduce using rule 8 (assignment -> ID ASSIGN expression SEMI .)
+    $end            reduce using rule 8 (assignment -> ID ASSIGN expression SEMI .)
+    ENDDO           reduce using rule 8 (assignment -> ID ASSIGN expression SEMI .)
+
+
+state 23
+
+    (10) expression -> expression PLUS . term
+    (11) term -> . factor
+    (12) term -> . term MUL factor
+    (13) factor -> . NUM
+    (14) factor -> . ID
+
+    NUM             shift and go to state 19
+    ID              shift and go to state 15
+
+    term                           shift and go to state 27
+    factor                         shift and go to state 18
+
+state 24
+
+    (12) term -> term MUL . factor
+    (13) factor -> . NUM
+    (14) factor -> . ID
+
+    NUM             shift and go to state 19
+    ID              shift and go to state 15
+
+    factor                         shift and go to state 28
+
+state 25
+
+    (15) loop -> DO statement_list ENDDO WHILE . LPAREN condition RPAREN ENDWHILE
+
+    LPAREN          shift and go to state 29
+
+
+state 26
+
+    (7) declaration -> INT ID ASSIGN NUM SEMI .
+
+    INT             reduce using rule 7 (declaration -> INT ID ASSIGN NUM SEMI .)
+    ID              reduce using rule 7 (declaration -> INT ID ASSIGN NUM SEMI .)
+    DO              reduce using rule 7 (declaration -> INT ID ASSIGN NUM SEMI .)
+    $end            reduce using rule 7 (declaration -> INT ID ASSIGN NUM SEMI .)
+    ENDDO           reduce using rule 7 (declaration -> INT ID ASSIGN NUM SEMI .)
+
+
+state 27
+
+    (10) expression -> expression PLUS term .
+    (12) term -> term . MUL factor
+
+    SEMI            reduce using rule 10 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 10 (expression -> expression PLUS term .)
+    MUL             shift and go to state 24
+
+
+state 28
+
+    (12) term -> term MUL factor .
+
+    MUL             reduce using rule 12 (term -> term MUL factor .)
+    SEMI            reduce using rule 12 (term -> term MUL factor .)
+    PLUS            reduce using rule 12 (term -> term MUL factor .)
+
+
+state 29
+
+    (15) loop -> DO statement_list ENDDO WHILE LPAREN . condition RPAREN ENDWHILE
+    (16) condition -> . ID ASSIGN NUM
+
+    ID              shift and go to state 31
+
+    condition                      shift and go to state 30
+
+state 30
+
+    (15) loop -> DO statement_list ENDDO WHILE LPAREN condition . RPAREN ENDWHILE
+
+    RPAREN          shift and go to state 32
+
+
+state 31
+
+    (16) condition -> ID . ASSIGN NUM
+
+    ASSIGN          shift and go to state 33
+
+
+state 32
+
+    (15) loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN . ENDWHILE
+
+    ENDWHILE        shift and go to state 34
+
+
+state 33
+
+    (16) condition -> ID ASSIGN . NUM
+
+    NUM             shift and go to state 35
+
+
+state 34
+
+    (15) loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE .
+
+    INT             reduce using rule 15 (loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE .)
+    ID              reduce using rule 15 (loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE .)
+    DO              reduce using rule 15 (loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE .)
+    $end            reduce using rule 15 (loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE .)
+    ENDDO           reduce using rule 15 (loop -> DO statement_list ENDDO WHILE LPAREN condition RPAREN ENDWHILE .)
+
+
+state 35
+
+    (16) condition -> ID ASSIGN NUM .
+
+    RPAREN          reduce using rule 16 (condition -> ID ASSIGN NUM .)
+
